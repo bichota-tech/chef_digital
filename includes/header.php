@@ -15,7 +15,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     
     <!-- Estilos de Chef Digital -->
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <?php
+    // Construir la URL base de forma dinámica para que funcione en cualquier hosting
+    // (InfinityFree, localhost, Render, etc.) sin importar la ruta del archivo actual.
+    $protocolo  = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+    $host       = $_SERVER['HTTP_HOST'] ?? 'localhost';
+    $script_dir = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\');
+    $base_url   = $protocolo . '://' . $host . $script_dir;
+    ?>
+    <link rel="stylesheet" href="<?php echo $base_url; ?>/assets/css/styles.css">
 </head>
 <body>
     <a href="#contenido-principal" class="sr-only-focusable">Saltar al contenido principal</a>

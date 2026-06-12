@@ -1,0 +1,23 @@
+# ===================================================
+# Chef Digital - Configuración Apache para InfinityFree
+# ===================================================
+
+# 1. Archivo por defecto cuando se accede a la raíz del sitio
+DirectoryIndex index.php index.html
+
+# 2. Deshabilitar el listado de directorios (seguridad)
+Options -Indexes
+
+# 3. Seguir enlaces simbólicos (requerido por algunos hostings)
+Options +FollowSymLinks
+
+# 4. Encoding por defecto
+AddDefaultCharset UTF-8
+
+# 5. Forzar HTTPS (opcional - descomenta si tu dominio tiene SSL)
+# RewriteEngine On
+# RewriteCond %{HTTPS} off
+# RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# 6. Manejar errores personalizados (opcional)
+# ErrorDocument 404 /index.php
