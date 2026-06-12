@@ -15,7 +15,7 @@ define('CONF_DB_HOST', 'sql102.infinityfree.com');      // InfinityFree: sqlXXX.
 define('CONF_DB_PORT', 3306);
 define('CONF_DB_USER', 'if0_42164592');           // InfinityFree: tu usuario de base de datos (if0_XXXXXXX)
 define('CONF_DB_PASS', 'sj9GpGGmuIHyEH');               // InfinityFree: tu contraseña de cPanel
-define('CONF_DB_NAME', 'if0_42164592_db_chef_digital');    // InfinityFree: el nombre de base de datos creada (if0_XXXXX_chef_digital)
+define('CONF_DB_NAME', 'if0_42164592_db_chef');    // InfinityFree: el nombre de base de datos creada (if0_XXXXX_chef_digital)
 
 /**
  * Obtiene una instancia de conexión PDO a la base de datos.
