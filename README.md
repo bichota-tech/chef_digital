@@ -51,29 +51,34 @@
 
 ---
 
-## 🌐 Despliegue en la Nube (Render & PlanetScale)
+## 🌐 Despliegue en Servidor Gratuito (InfinityFree)
 
-Este proyecto está preparado para ejecutarse en la nube utilizando **Render** para el servidor web PHP y **PlanetScale** para la base de datos MySQL serverless.
+Este proyecto es compatible con servicios de hosting compartido tradicionales como **InfinityFree** de forma totalmente gratuita.
 
-### 1. Base de Datos en PlanetScale
+### 1. Preparar la Base de Datos en cPanel
+- Regístrate o inicia sesión en [InfinityFree](https://infinityfree.com/) y crea una cuenta de hosting.
+- Entra al panel de control (cPanel / VistaPanel) y haz clic en **MySQL Databases**.
+- Crea una nueva base de datos. InfinityFree le asignará automáticamente un prefijo basado en tu cuenta (ejemplo: `if0_3628318_chef_digital`).
+- Toma nota de tus credenciales que se muestran en el panel:
+  - **MySQL Hostname**: (ejemplo: `sql203.infinityfree.com`)
+  - **MySQL Username**: (ejemplo: `if0_3628318`)
+  - **MySQL Password**: (la contraseña de tu cuenta de cPanel)
+- Entra a **phpMyAdmin** desde el panel, selecciona la base de datos recién creada e importa el archivo [`chef_digital.sql`](chef_digital.sql).
 
-- Crea una base de datos en [PlanetScale](https://planetscale.com/).
-- Importa las tablas y los registros de prueba ejecutando el script [`chef_digital.sql`](chef_digital.sql) desde la consola web o mediante tu cliente de base de datos preferido.
-- Obtén las credenciales de conexión en formato de variables de entorno o cadena de conexión (`DATABASE_URL`).
+### 2. Configurar el Backend para Producción
+- Abre el archivo [`config/db.php`](config/db.php) y localiza la sección de **Configuración Manual** en la parte superior.
+- Reemplaza los valores por defecto con tus credenciales de InfinityFree:
+  ```php
+  define('CONF_DB_HOST', 'sql203.infinityfree.com'); // Tu Hostname de MySQL
+  define('CONF_DB_USER', 'if0_3628318');             // Tu Username
+  define('CONF_DB_PASS', 'tu_contraseña_cpanel');    // Tu Password
+  define('CONF_DB_NAME', 'if0_3628318_chef_digital'); // Tu Nombre de BD
+  ```
 
-### 2. Alojamiento PHP en Render
-
-- Crea un nuevo **Web Service** en [Render](https://render.com/) enlazado a tu repositorio Git de GitHub o GitLab.
-- Render detectará automáticamente el archivo `composer.json` en la raíz del proyecto y configurará el entorno como un servicio **PHP**.
-- En la pestaña **Environment** de Render, añade las siguientes variables de entorno:
-
-| Variable | Valor Recomendado / Ejemplo | Descripción |
-| :--- | :--- | :--- |
-| `DATABASE_URL` | `mysql://user:password@host/dbname` | Cadena de conexión rápida provista por PlanetScale. |
-| `DB_SSL_CA` | `/etc/ssl/certs/ca-certificates.crt` | Ruta interna de certificados de Render para conexiones SSL. |
-
-> [!IMPORTANT]
-> PlanetScale requiere **conexiones TLS/SSL obligatorias**. La base de datos no permitirá conexiones inseguras sin cifrar. El archivo [`config/db.php`](config/db.php) está preparado para leer `DB_SSL_CA` y adjuntar automáticamente la clave de seguridad `PDO::MYSQL_ATTR_SSL_CA` y la verificación de servidor correspondientes en la inicialización de PDO.
+### 3. Subir los Archivos mediante FTP o File Manager
+- Entra al **Online File Manager** de InfinityFree o conéctate vía FTP (usando herramientas como FileZilla).
+- Sube todo el contenido del proyecto (incluyendo la carpeta `config`, `includes`, `assets` y los archivos `.php`) dentro del directorio **`htdocs/`**.
+- Una vez finalizada la subida, accede al dominio asignado por InfinityFree (ejemplo: `http://tu-sitio.infinityfreeapp.com`) para ver tu catálogo Chef Digital en funcionamiento.
 
 ---
 

@@ -1,11 +1,13 @@
 -- =============================================================================
--- Base de Datos para "Chef Digital"
+-- NOTA PARA HOSTING COMPARTIDO (Ej: InfinityFree, Hostinger):
+-- En hostings compartidos, NO se permite crear bases de datos a través de scripts SQL. 
+-- Primero debes crear la base de datos desde el Panel de Control (cPanel) de tu hosting
+-- (la cual tendrá un prefijo como if0_XXXX_nombre_bd) y luego importar este archivo.
+--
+-- Si estás usando un servidor local (XAMPP/Laragon), puedes descomentar las siguientes 2 líneas:
+-- CREATE DATABASE IF NOT EXISTS `chef_digital` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+-- USE `chef_digital`;
 -- =============================================================================
--- Este script crea la base de datos y sus tablas normalizadas con claves foráneas,
--- restricciones e índices de optimización para un catálogo de recetas profesional.
-
-CREATE DATABASE IF NOT EXISTS `chef_digital` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE `chef_digital`;
 
 -- 1. Tabla: chefs
 -- Almacena la información de los chefs creadores de las recetas.
