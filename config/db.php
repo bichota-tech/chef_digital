@@ -11,11 +11,11 @@
 // CONFIGURACIÓN MANUAL (Para desarrollo local o Hostings como InfinityFree)
 // Si tu servidor NO utiliza variables de entorno, edita los siguientes valores:
 // =============================================================================
-define('CONF_DB_HOST', 'sql102.infinityfree.com');      // InfinityFree: sqlXXX.infinityfree.com (ver en tu panel)
-define('CONF_DB_PORT', 3306);
-define('CONF_DB_USER', 'if0_42164592');           // InfinityFree: tu usuario de base de datos (if0_XXXXXXX)
-define('CONF_DB_PASS', 'sj9GpGGmuIHyEH');               // InfinityFree: tu contraseña de cPanel
-define('CONF_DB_NAME', 'if0_42164592_db_chef');    // InfinityFree: el nombre de base de datos creada (if0_XXXXX_chef_digital)
+define('DB_HOST', 'sql102.infinityfree.com');      // InfinityFree: sqlXXX.infinityfree.com (ver en tu panel)
+define('DB_PORT', 3306);
+define('DB_USER', 'if0_42164592');           // InfinityFree: tu usuario de base de datos (if0_XXXXXXX)
+define('DB_PASS', 'sj9GpGGmuIHyEH');               // InfinityFree: tu contraseña de cPanel
+define('DB_NAME', 'if0_42164592_db_chef');    // InfinityFree: el nombre de base de datos creada (if0_XXXXX_chef_digital)
 
 /**
  * Obtiene una instancia de conexión PDO a la base de datos.
@@ -36,18 +36,18 @@ function obtenerConexion(): PDO {
             // Intentar parsear la URL de la base de datos (común en proveedores de hosting)
             $dbparts = parse_url($url);
             
-            $host    = $dbparts['host'] ?? CONF_DB_HOST;
-            $port    = $dbparts['port'] ?? CONF_DB_PORT;
-            $user    = $dbparts['user'] ?? CONF_DB_USER;
-            $pass    = $dbparts['pass'] ?? CONF_DB_PASS;
-            $dbname  = isset($dbparts['path']) ? ltrim($dbparts['path'], '/') : CONF_DB_NAME;
+            $host    = $dbparts['host'] ?? DB_HOST;
+            $port    = $dbparts['port'] ?? DB_PORT;
+            $user    = $dbparts['user'] ?? DB_USER;
+            $pass    = $dbparts['pass'] ?? DB_PASS;
+            $dbname  = isset($dbparts['path']) ? ltrim($dbparts['path'], '/') : DB_NAME;
         } else {
             // Cargar variables individuales o usar valores por defecto locales (XAMPP/Laragon)
-            $host    = getenv('DB_HOST') ?: CONF_DB_HOST;
-            $port    = getenv('DB_PORT') ?: CONF_DB_PORT;
-            $user    = getenv('DB_USER') ?: CONF_DB_USER;
-            $pass    = getenv('DB_PASS') !== false ? getenv('DB_PASS') : (getenv('DB_PASSWORD') !== false ? getenv('DB_PASSWORD') : CONF_DB_PASS);
-            $dbname  = getenv('DB_NAME') ?: CONF_DB_NAME;
+            $host    = getenv('DB_HOST') ?: DB_HOST;
+            $port    = getenv('DB_PORT') ?: DB_PORT;
+            $user    = getenv('DB_USER') ?: DB_USER;
+            $pass    = getenv('DB_PASS') !== false ? getenv('DB_PASS') : (getenv('DB_PASSWORD') !== false ? getenv('DB_PASSWORD') : DB_PASS);
+            $dbname  = getenv('DB_NAME') ?: DB_NAME;
         }
         
         $charset = 'utf8mb4';

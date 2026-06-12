@@ -56,6 +56,7 @@
 Este proyecto es compatible con servicios de hosting compartido tradicionales como **InfinityFree** de forma totalmente gratuita.
 
 ### 1. Preparar la Base de Datos en cPanel
+
 - Regístrate o inicia sesión en [InfinityFree](https://infinityfree.com/) y crea una cuenta de hosting.
 - Entra al panel de control (cPanel / VistaPanel) y haz clic en **MySQL Databases**.
 - Crea una nueva base de datos. InfinityFree le asignará automáticamente un prefijo basado en tu cuenta (ejemplo: `if0_3628318_chef_digital`).
@@ -66,8 +67,10 @@ Este proyecto es compatible con servicios de hosting compartido tradicionales co
 - Entra a **phpMyAdmin** desde el panel, selecciona la base de datos recién creada e importa el archivo [`chef_digital.sql`](chef_digital.sql).
 
 ### 2. Configurar el Backend para Producción
+
 - Abre el archivo [`config/db.php`](config/db.php) y localiza la sección de **Configuración Manual** en la parte superior.
 - Reemplaza los valores por defecto con tus credenciales de InfinityFree:
+
   ```php
   define('CONF_DB_HOST', 'sql203.infinityfree.com'); // Tu Hostname de MySQL
   define('CONF_DB_USER', 'if0_3628318');             // Tu Username
@@ -76,6 +79,7 @@ Este proyecto es compatible con servicios de hosting compartido tradicionales co
   ```
 
 ### 3. Subir los Archivos mediante FTP o File Manager
+
 - Entra al **Online File Manager** de InfinityFree o conéctate vía FTP (usando herramientas como FileZilla).
 - Sube todo el contenido del proyecto (incluyendo la carpeta `config`, `includes`, `assets` y los archivos `.php`) dentro del directorio **`htdocs/`**.
 - Una vez finalizada la subida, accede al dominio asignado por InfinityFree (ejemplo: `http://tu-sitio.infinityfreeapp.com`) para ver tu catálogo Chef Digital en funcionamiento.
